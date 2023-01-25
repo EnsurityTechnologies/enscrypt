@@ -94,11 +94,10 @@ func DecodeKeyPair(pwd string, privKey []byte, pubKey []byte) (PrivateKey, Publi
 			if err != nil {
 				return nil, nil, fmt.Errorf("key is invalid or password is wrong")
 			}
-			key, err := x509.ParsePKCS8PrivateKey(decData)
+			cryptoPrivKey, err = x509.ParsePKCS8PrivateKey(decData)
 			if err != nil {
 				return nil, nil, err
 			}
-			cryptoPrivKey = key.(*crypto.PrivateKey)
 		} else {
 			cryptoPrivKey, err = x509.ParsePKCS8PrivateKey(pemBlock.Bytes)
 			if err != nil {
